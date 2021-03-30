@@ -3,7 +3,7 @@ package org.decagon.sophia.services;
 import org.decagon.sophia.model.Person;
 
 public class OfficeOfPrincipal {
-    public static void expel(Person principal, Person student) throws Exception {
+    public static void expel(Person principal, Person student) {
 
         /* Expels Students  and reset their details*/
 
@@ -21,7 +21,7 @@ public class OfficeOfPrincipal {
     }
 
 
-    public static void promote(Person principal, Person person) throws Exception {
+    public static void promote(Person principal, Person person) {
 
         /* Promote teachers and students and update their ranking and level respectively */
 

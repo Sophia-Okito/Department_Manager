@@ -3,7 +3,7 @@ package org.decagon.sophia.services;
 import org.decagon.sophia.model.Person;
 
 public class ExamsAndRecord {
-    public static void getInfo(Person person) {
+    public static void getInfo(Person person) throws Exception {
 
         /* Display information about person */
 

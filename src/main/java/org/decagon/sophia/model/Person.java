@@ -10,7 +10,7 @@ public class Person implements PersonInterface {
 
     private final String name;
     private int age;
-    private int id;
+    private final int id;
     private final String position;
     private int numOfDuties;
     private int level;

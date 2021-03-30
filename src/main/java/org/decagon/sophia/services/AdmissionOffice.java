@@ -3,7 +3,7 @@ package org.decagon.sophia.services;
 import org.decagon.sophia.model.Person;
 
 public class AdmissionOffice {
-    public static void admit(Person principal, Person applicant)  {
+    public static void admit(Person principal, Person applicant) {
 
         /* Admit applicants and update their status*/
 
