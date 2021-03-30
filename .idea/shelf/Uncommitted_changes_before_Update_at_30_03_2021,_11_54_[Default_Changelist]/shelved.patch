@@ -1,0 +1,999 @@
+Index: src/main/java/org/decagon/sophia/Manager.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package org.decagon.sophia;\n\npublic class Manager {\n    public static void main(String[] args) {\n        Applicant app1 = new Applicant(\"Sophia\", 1001, 18);\n        app1.setAdmissionStatus();\n        app1.getInfo();\n\n        System.out.println();\n\n        Student std1 = new Student(\"Wilson\", 10001, \"Year 1\", 4);\n        std1.getInfo();\n\n        System.out.println();\n\n        NonAcademic staff1 = new NonAcademic(\"Jessica\", 2002, 23);\n        staff1.getInfo();\n\n        System.out.println();\n\n        Teacher teacher = new Teacher(\"James\", 3003, \"Year 2\", 2);\n        teacher.getInfo();\n    }\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/org/decagon/sophia/Manager.java b/src/main/java/org/decagon/sophia/Manager.java
+--- a/src/main/java/org/decagon/sophia/Manager.java	(revision f17735e60f9741d603cb1aad2545ffd89ab5acc0)
++++ b/src/main/java/org/decagon/sophia/Manager.java	(date 1617101577523)
+@@ -1,24 +1,93 @@
+ package org.decagon.sophia;
+ 
++import org.decagon.sophia.model.Person;
++import org.decagon.sophia.services.*;
++
+ public class Manager {
+-    public static void main(String[] args) {
+-        Applicant app1 = new Applicant("Sophia", 1001, 18);
+-        app1.setAdmissionStatus();
+-        app1.getInfo();
++    public static void main(String[] args) throws Exception {
++        Person teacherJoy = new Person("Joy", 100, "Teacher", 3, 200, 0);
++        Person teacherJames = new Person("James", 103, "Teacher", 1, 100, 14);
++
++        Person labAttendent = new Person("Judas", 505,  "Non-Academic", 12, 5);
++
++        Person studentBob= new Person("Bob", "Student", 10005,  300, 5, 13);
++
++        Person applicant10 = new Person("Stephen", 23, 10, "Applicant", "" );
++        Person applicant15 = new Person("Samuel", 16, 15, "Applicant", "" );
++
++        Person principal = new Person("Fatimah", 1, "Principal", 10);
++
++        Course courses = new Course(5,3,6,4,4);
++        Levels year1 = new Levels(200);
++
++        // Displaying Principal Information
++
++        ExamsAndRecord.getInfo(principal);
+ 
+-        System.out.println();
++        // Displaying Teacher Information Before Promotion
++        ExamsAndRecord.getInfo(teacherJoy);
+ 
+-        Student std1 = new Student("Wilson", 10001, "Year 1", 4);
+-        std1.getInfo();
+ 
+-        System.out.println();
++        OfficeOfPrincipal.promote(principal, teacherJoy);
+ 
+-        NonAcademic staff1 = new NonAcademic("Jessica", 2002, 23);
+-        staff1.getInfo();
++        // Displaying Teacher Information After Promotion - Ranking increased.
++        ExamsAndRecord.getInfo(teacherJoy);
+ 
+-        System.out.println();
++        //Displaying 100Level courses before teacher teaches
++        courses.getCourses(year1);
+ 
+-        Teacher teacher = new Teacher("James", 3003, "Year 2", 2);
+-        teacher.getInfo();
++        //number of times the courses were taught increased by 1 after teaching.
++        teacherJoy.teach(courses);
++
++        courses.getCourses(year1);
++
++        // Displaying Teacher Information Before Sack
++        ExamsAndRecord.getInfo(teacherJames);
++
++        OfficeOfPrincipal.sack(principal,teacherJames);
++
++        // Displaying Teacher Information After sack - Ranking reset = 0.
++        ExamsAndRecord.getInfo(teacherJames);
++
++
++        //Displaying Student info before expulsion;
++        ExamsAndRecord.getInfo(studentBob);
++
++        studentBob.takeClass();
++
++        OfficeOfPrincipal.expel(principal, studentBob);
++
++        //Displaying student info after expulsion - level = 0
++        ExamsAndRecord.getInfo(studentBob);
++
++        //Non academic staff info before performing duties;
++        ExamsAndRecord.getInfo(labAttendent);
++
++        labAttendent.performDuties();
++        teacherJoy.complaint(labAttendent);
++
++        //Non academic staff info after performing duties and reported by a teacher
++        // noOfDuties and noOfComplaint both increased by 1;
++        ExamsAndRecord.getInfo(labAttendent);
++
++
++        //Applicant info before successful admission;
++        ExamsAndRecord.getInfo(applicant10);
++
++        AdmissionOffice.admit(principal, applicant10);
++
++
++        //Applicant info after successful admission;
++        ExamsAndRecord.getInfo(applicant10);
++
++        //Applicant info before admission;
++        ExamsAndRecord.getInfo(applicant15);
++
++        AdmissionOffice.admit(principal, applicant15);
++
++        //Applicant info after unsuccessful admission
++       ExamsAndRecord.getInfo(applicant15);
++
++
+     }
+ }
+Index: src/main/java/org/decagon/sophia/App.java
+===================================================================
+diff --git a/src/main/java/org/decagon/sophia/App.java b/src/main/java/org/decagon/sophia/App.java
+deleted file mode 100644
+--- a/src/main/java/org/decagon/sophia/App.java	(revision f17735e60f9741d603cb1aad2545ffd89ab5acc0)
++++ /dev/null	(revision f17735e60f9741d603cb1aad2545ffd89ab5acc0)
+@@ -1,13 +0,0 @@
+-package org.decagon.sophia;
+-
+-/**
+- * Hello world!
+- *
+- */
+-public class App 
+-{
+-    public static void main( String[] args )
+-    {
+-        System.out.println( "Hello World!" );
+-    }
+-}
+Index: src/test/java/org/decagon/sophia/ApplicantTest.java
+===================================================================
+diff --git a/src/test/java/org/decagon/sophia/ApplicantTest.java b/src/test/java/org/decagon/sophia/ApplicantTest.java
+deleted file mode 100644
+--- a/src/test/java/org/decagon/sophia/ApplicantTest.java	(revision f17735e60f9741d603cb1aad2545ffd89ab5acc0)
++++ /dev/null	(revision f17735e60f9741d603cb1aad2545ffd89ab5acc0)
+@@ -1,27 +0,0 @@
+-package org.decagon.sophia;
+-
+-import org.junit.Test;
+-
+-import static org.hamcrest.MatcherAssert.assertThat;
+-import static org.junit.Assert.assertEquals;
+-import static org.junit.Assert.assertTrue;
+-//import static org.junit.Assert.assertThat;
+-
+-public class ApplicantTest {
+-
+-    @Test
+-    public void testGetGrade() {
+-        Applicant app1 = new Applicant("AY", 1001, 24);
+-        System.out.println(app1.getGrade());
+-        assertTrue("Error, random is too high",  100 >= app1.getGrade());
+-        assertTrue("Error, random is too low",  0  <= app1.getGrade());
+-    }
+-
+-    @Test
+-    public void testGetAdmissionStatus() {
+-        Applicant app2 = new Applicant("Francis", 1002, 26);
+-        assertEquals("Unsuccessful", app2.getAdmissionStatus());
+-    }
+-
+-
+-}
+Index: .idea/.gitignore
+===================================================================
+diff --git a/.idea/.gitignore b/.idea/.gitignore
+deleted file mode 100644
+--- a/.idea/.gitignore	(revision f17735e60f9741d603cb1aad2545ffd89ab5acc0)
++++ /dev/null	(revision f17735e60f9741d603cb1aad2545ffd89ab5acc0)
+@@ -1,3 +0,0 @@
+-# Default ignored files
+-/shelf/
+-/workspace.xml
+Index: src/test/java/org/decagon/sophia/AppTest.java
+===================================================================
+diff --git a/src/test/java/org/decagon/sophia/AppTest.java b/src/test/java/org/decagon/sophia/AppTest.java
+deleted file mode 100644
+--- a/src/test/java/org/decagon/sophia/AppTest.java	(revision f17735e60f9741d603cb1aad2545ffd89ab5acc0)
++++ /dev/null	(revision f17735e60f9741d603cb1aad2545ffd89ab5acc0)
+@@ -1,20 +0,0 @@
+-package org.decagon.sophia;
+-
+-import static org.junit.Assert.assertTrue;
+-
+-import org.junit.Test;
+-
+-/**
+- * Unit test for simple App.
+- */
+-public class AppTest 
+-{
+-    /**
+-     * Rigorous Test :-)
+-     */
+-    @Test
+-    public void shouldAnswerWithTrue()
+-    {
+-        assertTrue( true );
+-    }
+-}
+Index: src/main/java/org/decagon/sophia/Applicant.java
+===================================================================
+diff --git a/src/main/java/org/decagon/sophia/Applicant.java b/src/main/java/org/decagon/sophia/Applicant.java
+deleted file mode 100644
+--- a/src/main/java/org/decagon/sophia/Applicant.java	(revision f17735e60f9741d603cb1aad2545ffd89ab5acc0)
++++ /dev/null	(revision f17735e60f9741d603cb1aad2545ffd89ab5acc0)
+@@ -1,28 +0,0 @@
+-package org.decagon.sophia;
+-
+-public class Applicant extends PersonalInfo {
+-    private int grade;
+-    private String admissionStatus = "Unsuccessful";
+-
+-    public Applicant(String name, int id, int age) {
+-        super(name, id, age);
+-        grade = (int) (Math.random() * 101);
+-    }
+-
+-    public int getGrade() {
+-        return this.grade;
+-    }
+-
+-    public String getAdmissionStatus() {
+-        return admissionStatus;
+-    }
+-
+-    public void setAdmissionStatus(String admissionStatus) {
+-        this.admissionStatus = admissionStatus;
+-    }
+-
+-    public void getInfo() {
+-        System.out.println("Applicant with ID " + this.id + "\nName: " + this.getName() + "\nAge: " +
+-                this.getAge() + "\nGrade: " + this.grade + "\nAdmission Status: " + this.admissionStatus);
+-    }
+-}
+Index: src/main/java/org/decagon/sophia/Principal.java
+===================================================================
+diff --git a/src/main/java/org/decagon/sophia/Principal.java b/src/main/java/org/decagon/sophia/Principal.java
+deleted file mode 100644
+--- a/src/main/java/org/decagon/sophia/Principal.java	(revision f17735e60f9741d603cb1aad2545ffd89ab5acc0)
++++ /dev/null	(revision f17735e60f9741d603cb1aad2545ffd89ab5acc0)
+@@ -1,31 +0,0 @@
+-package org.decagon.sophia;
+-
+-public class Principal {
+-
+-    public void admit(Applicant applicant){
+-        if (applicant.getGrade() >  69 && !(applicant.getAge() <= 17)) {
+-            applicant.setAdmissionStatus("Successful");
+-        }
+-    }
+-
+-
+-    public void expel(Student student) {
+-        if (student.getNoOfComplaints() > 10 || student.getAvgGrade() < 30) {
+-            student.setStatus("Expel");
+-        }
+-    }
+-
+-
+-    public void promoteStudent(Student student) {
+-        if (student.getAvgGrade() > 49 && student.getStatus() == "In-School") {
+-            student.setLevel("Year 2");
+-        }
+-
+-    }
+-
+-    public void sackTeacher(Teacher teacher) {
+-        if (teacher.getNoOfComplaints() > 10) {
+-            teacher.setStatus("Sacked");
+-        }
+-    }
+-}
+Index: src/main/java/org/decagon/sophia/Student.java
+===================================================================
+diff --git a/src/main/java/org/decagon/sophia/Student.java b/src/main/java/org/decagon/sophia/Student.java
+deleted file mode 100644
+--- a/src/main/java/org/decagon/sophia/Student.java	(revision f17735e60f9741d603cb1aad2545ffd89ab5acc0)
++++ /dev/null	(revision f17735e60f9741d603cb1aad2545ffd89ab5acc0)
+@@ -1,70 +0,0 @@
+-package org.decagon.sophia;
+-
+-public class Student extends PersonalInfo implements Department {
+-    private String level;
+-    private int totalCourses;
+-    private int totalGrades;
+-    private int avgGrade;
+-    private int noOfComplaints;
+-    private String status;
+-
+-    public Student(String name, int id, String level, int totalCourses) {
+-        super(name, id);
+-        this.level = level;
+-        this.totalCourses = totalCourses;
+-        noOfComplaints = (int) (Math.random() * 16);
+-        totalGrades = (int) (Math.random() * 101) * totalCourses;
+-        avgGrade = (int) (totalGrades / totalCourses);
+-        status = "In-School";
+-
+-    }
+-
+-    public String getLevel() {
+-        return level;
+-    }
+-
+-    public int getTotalCourses() {
+-        return totalCourses;
+-    }
+-
+-    public int getTotalGrades() {
+-        return totalGrades;
+-    }
+-
+-    public int getAvgGrade() {
+-        return avgGrade;
+-    }
+-
+-    public int getNoOfComplaints() {
+-        return noOfComplaints;
+-    }
+-
+-    public String getStatus() {
+-        return status;
+-    }
+-
+-    public void setStatus(String status) {
+-        this.status = status;
+-    }
+-
+-    public void setLevel(String level) {
+-        this.level = level;
+-    }
+-
+-    @Override
+-    public void complaint() {
+-        System.out.println("Disrepected by " + this.id);
+-    }
+-
+-    public void takeClass() {
+-        System.out.println("This class was awesome");
+-    }
+-
+-    @Override
+-    public void getInfo() {
+-        System.out.println("Student with ID " + this.id + "\nName: " + this.getName() + "\nStudent Status: " + this.status
+-                + "\nLevel: " + this.level + "\nTotal Course: " + this.totalCourses + "\nAverage: " + this.avgGrade
+-                + "\nNo. of Complaint: " + this.noOfComplaints);
+-    }
+-
+-}
+Index: src/main/java/org/decagon/sophia/NonAcademic.java
+===================================================================
+diff --git a/src/main/java/org/decagon/sophia/NonAcademic.java b/src/main/java/org/decagon/sophia/NonAcademic.java
+deleted file mode 100644
+--- a/src/main/java/org/decagon/sophia/NonAcademic.java	(revision f17735e60f9741d603cb1aad2545ffd89ab5acc0)
++++ /dev/null	(revision f17735e60f9741d603cb1aad2545ffd89ab5acc0)
+@@ -1,35 +0,0 @@
+-package org.decagon.sophia;
+-
+-public class NonAcademic extends PersonalInfo implements Department {
+-    private int numOfDuties;
+-    private int noOfComplaints;
+-
+-    public NonAcademic(String name, int id, int age) {
+-        super(name, id, age);
+-        numOfDuties = (int) (Math.random() * 11);
+-        noOfComplaints = (int) (Math.random() * 16);
+-    }
+-
+-    @Override
+-    public void complaint() {
+-        System.out.println("Disrepected by " + this.id);
+-    }
+-
+-    public void performDuties() {
+-        System.out.println("Duty done!");
+-    }
+-
+-    public int getNumOfDuties() {
+-        return this.numOfDuties;
+-    }
+-
+-    public int getNoOfComplaints() {
+-        return noOfComplaints;
+-    }
+-
+-    @Override
+-    public void getInfo() {
+-        System.out.println("Staff with ID " + this.id + "\nName: " + this.getName() + "\nTotal Duties Performed: "
+-                + this.numOfDuties + "\nNo. of Complaint " + this.noOfComplaints);
+-    }
+-}
+Index: src/main/java/org/decagon/sophia/PersonalInfo.java
+===================================================================
+diff --git a/src/main/java/org/decagon/sophia/PersonalInfo.java b/src/main/java/org/decagon/sophia/PersonalInfo.java
+deleted file mode 100644
+--- a/src/main/java/org/decagon/sophia/PersonalInfo.java	(revision f17735e60f9741d603cb1aad2545ffd89ab5acc0)
++++ /dev/null	(revision f17735e60f9741d603cb1aad2545ffd89ab5acc0)
+@@ -1,40 +0,0 @@
+-package org.decagon.sophia;
+-
+-public class PersonalInfo {
+-    private String name;
+-    private int age;
+-    public int id;
+-    private String status;
+-
+-    public PersonalInfo(String name, String status, int id, int age) {
+-        this.status = status;
+-        this.name = name;
+-        this.id = id;
+-        this.age = age;
+-
+-    }
+-
+-    public PersonalInfo(String name, int id, int age) {
+-        this.name = name;
+-        this.id = id;
+-        this.age = age;
+-
+-    }
+-
+-    public PersonalInfo(String name, int id) {
+-        this.name = name;
+-        this.id = id;
+-    }
+-
+-    public int getAge() {
+-        return age;
+-    }
+-
+-    public String getName() {
+-        return this.name;
+-    }
+-
+-    public String getStatus() {
+-        return status;
+-    }
+-}
+Index: src/main/java/org/decagon/sophia/Teacher.java
+===================================================================
+diff --git a/src/main/java/org/decagon/sophia/Teacher.java b/src/main/java/org/decagon/sophia/Teacher.java
+deleted file mode 100644
+--- a/src/main/java/org/decagon/sophia/Teacher.java	(revision f17735e60f9741d603cb1aad2545ffd89ab5acc0)
++++ /dev/null	(revision f17735e60f9741d603cb1aad2545ffd89ab5acc0)
+@@ -1,43 +0,0 @@
+-package org.decagon.sophia;
+-
+-public class Teacher extends PersonalInfo implements Department {
+-    private String levelTaught;
+-    private int noOfCourses;
+-    private int noOfComplaints;
+-    private String status;
+-
+-    public Teacher(String name, int id, String levelTaught, int noOfCourses) {
+-        super(name, id);
+-        this.levelTaught = levelTaught;
+-        this.noOfCourses = noOfCourses;
+-        noOfComplaints = (int) (Math.random() * 16);
+-        status = "Employed";
+-    }
+-
+-    public void teach() {
+-        System.out.println("Teaching.....");
+-    }
+-
+-    @Override
+-    public void complaint() {
+-        System.out.println("Disrepected by " + this.id);
+-    }
+-
+-    public int getNoOfComplaints() {
+-        return noOfComplaints;
+-    }
+-
+-    public String getStatus() {
+-        return status;
+-    }
+-
+-    public void setStatus(String status) {
+-        this.status = status;
+-    }
+-
+-    @Override
+-    public void getInfo() {
+-        System.out.println("Teacher with ID " + this.id + "\nName: " + this.getName() + "\nLevel Taught: " + this.levelTaught +
+-                "\nTotal no. of Courses: " + this.noOfCourses + "\nNo. of Complaint " + this.noOfComplaints);
+-    }
+-}
+Index: src/main/java/org/decagon/sophia/Department.java
+===================================================================
+diff --git a/src/main/java/org/decagon/sophia/Department.java b/src/main/java/org/decagon/sophia/Department.java
+deleted file mode 100644
+--- a/src/main/java/org/decagon/sophia/Department.java	(revision f17735e60f9741d603cb1aad2545ffd89ab5acc0)
++++ /dev/null	(revision f17735e60f9741d603cb1aad2545ffd89ab5acc0)
+@@ -1,6 +0,0 @@
+-package org.decagon.sophia;
+-
+-public interface Department {
+-    public void complaint();
+-    public void getInfo();
+-}
+Index: src/test/java/org/decagon/sophia/TeacherTest.java
+===================================================================
+diff --git a/src/test/java/org/decagon/sophia/TeacherTest.java b/src/test/java/org/decagon/sophia/TeacherTest.java
+deleted file mode 100644
+--- a/src/test/java/org/decagon/sophia/TeacherTest.java	(revision f17735e60f9741d603cb1aad2545ffd89ab5acc0)
++++ /dev/null	(revision f17735e60f9741d603cb1aad2545ffd89ab5acc0)
+@@ -1,7 +0,0 @@
+-package org.decagon.sophia;
+-
+-import org.junit.Test;
+-
+-public class TeacherTest {
+-
+-}
+Index: src/main/java/org/decagon/sophia/model/Person.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/org/decagon/sophia/model/Person.java b/src/main/java/org/decagon/sophia/model/Person.java
+new file mode 100644
+--- /dev/null	(date 1617101577534)
++++ b/src/main/java/org/decagon/sophia/model/Person.java	(date 1617101577534)
+@@ -0,0 +1,229 @@
++package org.decagon.sophia.model;
++
++import org.decagon.sophia.services.Course;
++
++import java.util.Objects;
++
++public class Person implements PersonInterface {
++
++    /* * @class create student, staff and applicant of university. */
++
++    private final String name;
++    private int age;
++    private int id;
++    private final String position;
++    private int numOfDuties;
++    private int level;
++    private int totalCourses;
++    private int avgGrade;
++    private int noOfComplaints;
++    private String status = "";
++    private int levelTaught;
++    private int ranking;
++
++    public Person(String name, int id, String position, int ranking) {
++
++        /* Principal constructor */
++
++        this.name = name;
++        this.id = id;
++        this.position = position;
++        this.ranking = ranking;
++    }
++
++    public Person(String name, int id, String position, int ranking, int levelTaught, int noOfComplaints) {
++
++        /* Teacher constructor */
++
++        this.name = name;
++        this.id = id;
++        this.position = position;
++        this.noOfComplaints = noOfComplaints;
++        this.levelTaught = levelTaught;
++        this.ranking = ranking;
++    }
++
++    public Person(String name, int id, String position, int numOfDuties, int noOfComplaints) {
++
++        /* Non-Academic Staff constructor */
++
++        this.name = name;
++        this.id = id;
++        this.position = position;
++        this.numOfDuties = numOfDuties;
++        this.noOfComplaints = noOfComplaints;
++    }
++
++
++    public Person(String name, String position, int id, int level, int totalCourses, int noOfComplaints) {
++
++        /* Student constructor */
++
++        this.name = name;
++        this.id = id;
++        this.position = position;
++        this.level = level;
++        this.totalCourses = totalCourses;
++        this.noOfComplaints = noOfComplaints;
++        avgGrade = (int) (Math.random() * 101);
++    }
++
++
++    public Person(String name, int age, int id, String position, String status) {
++
++        /* Applicant Constructor */
++
++        this.name = name;
++        this.age = age;
++        this.id = id;
++        this.position = position;
++        this.status = status;
++        avgGrade = (int) (Math.random() * 101);
++    }
++
++    @Override
++    public void complaint(Person person) {
++
++        /* Report Teacher, Student and non-academic staff and increases number of complaint by 1 */
++
++        if (person.position.equals("Teacher") || person.position.equals("Student") || person.position.equals("Non-Academic")) {
++            System.out.println("\nI was Disrespected\n");
++            person.noOfComplaints++;
++            System.out.println(person.name + " got reported\n");
++        } else {
++            System.out.println("\nThis Person is beyond Complaint\n");
++        }
++
++    }
++
++    @Override
++    public void teach(Course subject) {
++
++        /* Teacher teaches courses based on level and update details */
++
++        if (Objects.equals(this.position, "Teacher")) {
++            if (this.levelTaught == 100) {
++                subject.setMaths(subject.getMaths() + 1);
++                subject.setEnglish(subject.getEnglish() + 1);
++            } else if (this.levelTaught == 200) {
++                subject.setBiology(subject.getBiology() + 1);
++                subject.setChemistry(subject.getChemistry() + 1);
++            } else  if (this.levelTaught == 300) {
++                subject.setPhysics(subject.getPhysics() + 1);
++                subject.setChemistry(subject.getChemistry() + 1);
++            } else {
++                System.out.println("No course for this level");
++            }
++
++        } else {
++            System.out.println("This person can not teach");
++        }
++    }
++
++
++    @Override
++    public void takeClass() {
++
++        /* students take courses */
++
++        if (this.position.equals("Student")) {
++            System.out.println("\nLearning - " + this.name);
++        } else {
++            System.out.println("\nThis person can not take course\n");
++        }
++    }
++
++
++    @Override
++    public void performDuties() {
++
++        /* non academic staff perform duties and update details. */
++
++        if (this.position.equals("Non-Academic")) {
++            System.out.println("\nPerforming Duties - " + this.name + "\n");
++            this.numOfDuties += 1;
++        } else {
++            System.out.println("\nWhat Duties?\n");
++        }
++    }
++
++    public int getNoOfComplaints() {
++        return noOfComplaints;
++    }
++
++    public String getPosition() {
++        return position;
++    }
++
++    public int getAvgGrade() {
++        return avgGrade;
++    }
++
++    public int getAge() {
++        return age;
++    }
++
++    public void setStatus(String status) {
++        this.status = status;
++    }
++
++    public String getName() {
++        return name;
++    }
++
++    public int getId() {
++        return id;
++    }
++
++    public int getNumOfDuties() {
++        return numOfDuties;
++    }
++
++    public int getLevel() {
++        return level;
++    }
++
++    public int getTotalCourses() {
++        return totalCourses;
++    }
++
++    public String getStatus() {
++        return status;
++    }
++
++    public int getLevelTaught() {
++        return levelTaught;
++    }
++
++    public int getRanking() {
++        return ranking;
++    }
++
++    public void setNumOfDuties(int numOfDuties) {
++        this.numOfDuties = numOfDuties;
++    }
++
++    public void setNoOfComplaints(int noOfComplaints) {
++        this.noOfComplaints = noOfComplaints;
++    }
++
++    public void setLevelTaught(int levelTaught) {
++        this.levelTaught = levelTaught;
++    }
++
++    public void setRanking(int ranking) {
++        this.ranking = ranking;
++    }
++
++    public void setLevel(int level) {
++        this.level = level;
++    }
++
++    public void setTotalCourses(int totalCourses) {
++        this.totalCourses = totalCourses;
++    }
++
++    public void setAvgGrade(int avgGrade) {
++        this.avgGrade = avgGrade;
++    }
++}
+Index: src/main/java/org/decagon/sophia/model/PersonInterface.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/org/decagon/sophia/model/PersonInterface.java b/src/main/java/org/decagon/sophia/model/PersonInterface.java
+new file mode 100644
+--- /dev/null	(date 1617101577539)
++++ b/src/main/java/org/decagon/sophia/model/PersonInterface.java	(date 1617101577539)
+@@ -0,0 +1,10 @@
++package org.decagon.sophia.model;
++
++import org.decagon.sophia.services.Course;
++
++public interface PersonInterface {
++    void complaint(Person person);
++    void teach(Course subject);
++    void takeClass();
++    void performDuties();
++}
+Index: .idea/uiDesigner.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/uiDesigner.xml b/.idea/uiDesigner.xml
+new file mode 100644
+--- /dev/null	(date 1617045963496)
++++ b/.idea/uiDesigner.xml	(date 1617045963496)
+@@ -0,0 +1,124 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="Palette2">
++    <group name="Swing">
++      <item class="com.intellij.uiDesigner.HSpacer" tooltip-text="Horizontal Spacer" icon="/com/intellij/uiDesigner/icons/hspacer.png" removable="false" auto-create-binding="false" can-attach-label="false">
++        <default-constraints vsize-policy="1" hsize-policy="6" anchor="0" fill="1" />
++      </item>
++      <item class="com.intellij.uiDesigner.VSpacer" tooltip-text="Vertical Spacer" icon="/com/intellij/uiDesigner/icons/vspacer.png" removable="false" auto-create-binding="false" can-attach-label="false">
++        <default-constraints vsize-policy="6" hsize-policy="1" anchor="0" fill="2" />
++      </item>
++      <item class="javax.swing.JPanel" icon="/com/intellij/uiDesigner/icons/panel.png" removable="false" auto-create-binding="false" can-attach-label="false">
++        <default-constraints vsize-policy="3" hsize-policy="3" anchor="0" fill="3" />
++      </item>
++      <item class="javax.swing.JScrollPane" icon="/com/intellij/uiDesigner/icons/scrollPane.png" removable="false" auto-create-binding="false" can-attach-label="true">
++        <default-constraints vsize-policy="7" hsize-policy="7" anchor="0" fill="3" />
++      </item>
++      <item class="javax.swing.JButton" icon="/com/intellij/uiDesigner/icons/button.png" removable="false" auto-create-binding="true" can-attach-label="false">
++        <default-constraints vsize-policy="0" hsize-policy="3" anchor="0" fill="1" />
++        <initial-values>
++          <property name="text" value="Button" />
++        </initial-values>
++      </item>
++      <item class="javax.swing.JRadioButton" icon="/com/intellij/uiDesigner/icons/radioButton.png" removable="false" auto-create-binding="true" can-attach-label="false">
++        <default-constraints vsize-policy="0" hsize-policy="3" anchor="8" fill="0" />
++        <initial-values>
++          <property name="text" value="RadioButton" />
++        </initial-values>
++      </item>
++      <item class="javax.swing.JCheckBox" icon="/com/intellij/uiDesigner/icons/checkBox.png" removable="false" auto-create-binding="true" can-attach-label="false">
++        <default-constraints vsize-policy="0" hsize-policy="3" anchor="8" fill="0" />
++        <initial-values>
++          <property name="text" value="CheckBox" />
++        </initial-values>
++      </item>
++      <item class="javax.swing.JLabel" icon="/com/intellij/uiDesigner/icons/label.png" removable="false" auto-create-binding="false" can-attach-label="false">
++        <default-constraints vsize-policy="0" hsize-policy="0" anchor="8" fill="0" />
++        <initial-values>
++          <property name="text" value="Label" />
++        </initial-values>
++      </item>
++      <item class="javax.swing.JTextField" icon="/com/intellij/uiDesigner/icons/textField.png" removable="false" auto-create-binding="true" can-attach-label="true">
++        <default-constraints vsize-policy="0" hsize-policy="6" anchor="8" fill="1">
++          <preferred-size width="150" height="-1" />
++        </default-constraints>
++      </item>
++      <item class="javax.swing.JPasswordField" icon="/com/intellij/uiDesigner/icons/passwordField.png" removable="false" auto-create-binding="true" can-attach-label="true">
++        <default-constraints vsize-policy="0" hsize-policy="6" anchor="8" fill="1">
++          <preferred-size width="150" height="-1" />
++        </default-constraints>
++      </item>
++      <item class="javax.swing.JFormattedTextField" icon="/com/intellij/uiDesigner/icons/formattedTextField.png" removable="false" auto-create-binding="true" can-attach-label="true">
++        <default-constraints vsize-policy="0" hsize-policy="6" anchor="8" fill="1">
++          <preferred-size width="150" height="-1" />
++        </default-constraints>
++      </item>
++      <item class="javax.swing.JTextArea" icon="/com/intellij/uiDesigner/icons/textArea.png" removable="false" auto-create-binding="true" can-attach-label="true">
++        <default-constraints vsize-policy="6" hsize-policy="6" anchor="0" fill="3">
++          <preferred-size width="150" height="50" />
++        </default-constraints>
++      </item>
++      <item class="javax.swing.JTextPane" icon="/com/intellij/uiDesigner/icons/textPane.png" removable="false" auto-create-binding="true" can-attach-label="true">
++        <default-constraints vsize-policy="6" hsize-policy="6" anchor="0" fill="3">
++          <preferred-size width="150" height="50" />
++        </default-constraints>
++      </item>
++      <item class="javax.swing.JEditorPane" icon="/com/intellij/uiDesigner/icons/editorPane.png" removable="false" auto-create-binding="true" can-attach-label="true">
++        <default-constraints vsize-policy="6" hsize-policy="6" anchor="0" fill="3">
++          <preferred-size width="150" height="50" />
++        </default-constraints>
++      </item>
++      <item class="javax.swing.JComboBox" icon="/com/intellij/uiDesigner/icons/comboBox.png" removable="false" auto-create-binding="true" can-attach-label="true">
++        <default-constraints vsize-policy="0" hsize-policy="2" anchor="8" fill="1" />
++      </item>
++      <item class="javax.swing.JTable" icon="/com/intellij/uiDesigner/icons/table.png" removable="false" auto-create-binding="true" can-attach-label="false">
++        <default-constraints vsize-policy="6" hsize-policy="6" anchor="0" fill="3">
++          <preferred-size width="150" height="50" />
++        </default-constraints>
++      </item>
++      <item class="javax.swing.JList" icon="/com/intellij/uiDesigner/icons/list.png" removable="false" auto-create-binding="true" can-attach-label="false">
++        <default-constraints vsize-policy="6" hsize-policy="2" anchor="0" fill="3">
++          <preferred-size width="150" height="50" />
++        </default-constraints>
++      </item>
++      <item class="javax.swing.JTree" icon="/com/intellij/uiDesigner/icons/tree.png" removable="false" auto-create-binding="true" can-attach-label="false">
++        <default-constraints vsize-policy="6" hsize-policy="6" anchor="0" fill="3">
++          <preferred-size width="150" height="50" />
++        </default-constraints>
++      </item>
++      <item class="javax.swing.JTabbedPane" icon="/com/intellij/uiDesigner/icons/tabbedPane.png" removable="false" auto-create-binding="true" can-attach-label="false">
++        <default-constraints vsize-policy="3" hsize-policy="3" anchor="0" fill="3">
++          <preferred-size width="200" height="200" />
++        </default-constraints>
++      </item>
++      <item class="javax.swing.JSplitPane" icon="/com/intellij/uiDesigner/icons/splitPane.png" removable="false" auto-create-binding="false" can-attach-label="false">
++        <default-constraints vsize-policy="3" hsize-policy="3" anchor="0" fill="3">
++          <preferred-size width="200" height="200" />
++        </default-constraints>
++      </item>
++      <item class="javax.swing.JSpinner" icon="/com/intellij/uiDesigner/icons/spinner.png" removable="false" auto-create-binding="true" can-attach-label="true">
++        <default-constraints vsize-policy="0" hsize-policy="6" anchor="8" fill="1" />
++      </item>
++      <item class="javax.swing.JSlider" icon="/com/intellij/uiDesigner/icons/slider.png" removable="false" auto-create-binding="true" can-attach-label="false">
++        <default-constraints vsize-policy="0" hsize-policy="6" anchor="8" fill="1" />
++      </item>
++      <item class="javax.swing.JSeparator" icon="/com/intellij/uiDesigner/icons/separator.png" removable="false" auto-create-binding="false" can-attach-label="false">
++        <default-constraints vsize-policy="6" hsize-policy="6" anchor="0" fill="3" />
++      </item>
++      <item class="javax.swing.JProgressBar" icon="/com/intellij/uiDesigner/icons/progressbar.png" removable="false" auto-create-binding="true" can-attach-label="false">
++        <default-constraints vsize-policy="0" hsize-policy="6" anchor="0" fill="1" />
++      </item>
++      <item class="javax.swing.JToolBar" icon="/com/intellij/uiDesigner/icons/toolbar.png" removable="false" auto-create-binding="false" can-attach-label="false">
++        <default-constraints vsize-policy="0" hsize-policy="6" anchor="0" fill="1">
++          <preferred-size width="-1" height="20" />
++        </default-constraints>
++      </item>
++      <item class="javax.swing.JToolBar$Separator" icon="/com/intellij/uiDesigner/icons/toolbarSeparator.png" removable="false" auto-create-binding="false" can-attach-label="false">
++        <default-constraints vsize-policy="0" hsize-policy="0" anchor="0" fill="1" />
++      </item>
++      <item class="javax.swing.JScrollBar" icon="/com/intellij/uiDesigner/icons/scrollbar.png" removable="false" auto-create-binding="true" can-attach-label="false">
++        <default-constraints vsize-policy="6" hsize-policy="0" anchor="0" fill="2" />
++      </item>
++    </group>
++  </component>
++</project>
+\ No newline at end of file
+Index: src/main/java/org/decagon/sophia/services/Course.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/org/decagon/sophia/services/Course.java b/src/main/java/org/decagon/sophia/services/Course.java
+new file mode 100644
+--- /dev/null	(date 1617093397554)
++++ b/src/main/java/org/decagon/sophia/services/Course.java	(date 1617093397554)
+@@ -0,0 +1,71 @@
++package org.decagon.sophia.services;
++
++public class Course extends Levels {
++    private int maths;
++    private int english;
++    private int biology;
++    private int physics;
++    private int chemistry;
++
++    public Course(int maths, int english, int biology, int physics, int chemistry) {
++        super();
++        this.maths = maths;
++        this.english = english;
++        this.biology = biology;
++        this.physics = physics;
++        this.chemistry = chemistry;
++    }
++
++    public void setMaths(int maths) {
++        this.maths = maths;
++    }
++
++    public void setEnglish(int english) {
++        this.english = english;
++    }
++
++    public void setBiology(int biology) {
++        this.biology = biology;
++    }
++
++    public void setPhysics(int physics) {
++        this.physics = physics;
++    }
++
++    public void setChemistry(int chemistry) {
++        this.chemistry = chemistry;
++    }
++
++    public int getMaths() {
++        return maths;
++    }
++
++    public int getEnglish() {
++        return english;
++    }
++
++    public int getBiology() {
++        return biology;
++    }
++
++    public int getPhysics() {
++        return physics;
++    }
++
++    public int getChemistry() {
++        return chemistry;
++    }
++
++    public void getCourses(Levels lvl) {
++        if (lvl.level == 100) {
++            System.out.printf("\nNumber of times courses were taught\nMaths: %d\nEnglish: %d\n", getMaths(), getEnglish());
++        } else if (lvl.level == 200) {
++            System.out.printf("\nNumber of times courses were taught\nBiology: %d\nChemistry: %d\n", getBiology(), getChemistry());
++        } else if (lvl.level == 300) {
++            System.out.printf("\nNumber of times courses taught\nChemistry: %d\nPhysics: %d\n", getChemistry(), getPhysics());
++        } else {
++            System.out.println("\nNo level found\n");
++        }
++
++    }
++}

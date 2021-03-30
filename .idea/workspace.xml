@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="14dc393a-8c2b-4c20-b557-9bfa9bfd350e" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/decagon/sophia/model/Person.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/decagon/sophia/model/PersonInterface.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/decagon/sophia/services/Course.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/decagon/sophia/App.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/decagon/sophia/Applicant.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/decagon/sophia/Department.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/decagon/sophia/Manager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/decagon/sophia/Manager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/decagon/sophia/NonAcademic.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/decagon/sophia/PersonalInfo.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/decagon/sophia/Principal.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/decagon/sophia/Student.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/decagon/sophia/Teacher.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/org/decagon/sophia/AppTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/org/decagon/sophia/ApplicantTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/org/decagon/sophia/TeacherTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/decagon/sophia/App.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/decagon/sophia/Applicant.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/decagon/sophia/Department.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/decagon/sophia/Manager.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/decagon/sophia/Manager.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/decagon/sophia/NonAcademic.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/decagon/sophia/PersonalInfo.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/decagon/sophia/Principal.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/decagon/sophia/Student.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/decagon/sophia/Teacher.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/org/decagon/sophia/AppTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/org/decagon/sophia/ApplicantTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/org/decagon/sophia/TeacherTest.class" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="1qRJ7fMnBQHTzxk1Dz0XhR45EC3" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+  </component>
+  <component name="RunManager" selected="Application.Manager">
+    <configuration name="Manager" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="org.decagon.sophia.Manager" />
+      <module name="SchoolManagement" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.decagon.sophia.services.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="PersonTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="SchoolManagement" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.decagon.sophia.services.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="org.decagon.sophia" />
+      <option name="MAIN_CLASS_NAME" value="org.decagon.sophia.PersonTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="PersonTest.testComplaint" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="SchoolManagement" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.decagon.sophia.services.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="org.decagon.sophia" />
+      <option name="MAIN_CLASS_NAME" value="org.decagon.sophia.PersonTest" />
+      <option name="METHOD_NAME" value="testComplaint" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.Manager" />
+        <item itemvalue="JUnit.PersonTest.testComplaint" />
+        <item itemvalue="JUnit.PersonTest" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="14dc393a-8c2b-4c20-b557-9bfa9bfd350e" name="Default Changelist" comment="" />
+      <created>1617036305447</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1617036305447</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>
