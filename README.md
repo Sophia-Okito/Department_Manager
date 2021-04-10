@@ -6,11 +6,11 @@ You are to model a department using an object oriented programming (OOP) paradig
 
 ● Staffs
 
-  ○ Principal
+     ○ Principal
 
-  ○ Teachers
+     ○ Teachers
 
-  ○ Non-Academic Staffs
+     ○ Non-Academic Staffs
 
 ● Students
 
